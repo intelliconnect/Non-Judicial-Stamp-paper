@@ -1,8 +1,9 @@
 
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.12;
 
 // Creating a Smart Contract
 contract nonJudicialpaper{
+
 
 // Structure of contract
 struct contents{
@@ -12,6 +13,7 @@ struct contents{
 	string firstPartyname;
 	string counterPartyname;
 	string purpose;
+	string date;
 }
 
 contents []emps;
@@ -21,13 +23,14 @@ contents []emps;
 function addContractDetails(
 	int id, string memory firstPartyname,
 	string memory counterPartyname,
-	string memory purpose
+	string memory purpose,
+	string memory date
 ) public{
 	contents memory e
 		=contents(id,
 				firstPartyname,
 				counterPartyname,
-				purpose);
+				purpose, date);
 	emps.push(e);
 }
 
@@ -36,6 +39,7 @@ function addContractDetails(
 function getContractdetails(
 	int id
 ) public view returns(
+	string memory,
 	string memory,
 	string memory,
 	string memory){
@@ -51,7 +55,8 @@ function getContractdetails(
 		{
 				return(e.firstPartyname,
 					e.counterPartyname,
-					e.purpose);
+					e.purpose,
+					e.date);
 		}
 	}
 	
@@ -60,6 +65,7 @@ function getContractdetails(
 	// it returns Not
 	// Found
 	return("Not Found",
+			"Not Found",
 			"Not Found",
 			"Not Found");
 }
